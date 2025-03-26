@@ -23,10 +23,6 @@ export default function Dashboard() {
   })
   const { supabase } = useSupabase()
 
-  useEffect(() => {
-    fetchContents()
-  }, [])
-
   const fetchContents = async () => {
     try {
       const { data, error } = await supabase
@@ -42,6 +38,10 @@ export default function Dashboard() {
       toast.error('Error fetching content')
     }
   }
+
+  useEffect(() => {
+    fetchContents()
+  }, []) // ✅ Removed `fetchContents` from dependency array
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -78,7 +78,7 @@ export default function Dashboard() {
       if (error) throw error
 
       toast.success('Content updated successfully')
-      await fetchContents()
+      fetchContents() // ✅ No need for `await` here
     } catch (error: any) {
       console.error('Error updating content:', error)
       toast.error('Error updating content')

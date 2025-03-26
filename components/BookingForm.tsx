@@ -31,15 +31,13 @@ export default function BookingForm() {
 
   useEffect(() => {
     async function fetchServices() {
-      const { data, error } = await supabase.from('services').select('id, name, price')
-      if (error) {
-        console.error('Error fetching services:', error)
-      } else {
-        setServices(data)
-      }
+      const { data, error } = await supabase.from('services').select('id, name, price');
+      if (error) console.error('Error fetching services:', error);
+      else setServices(data);
     }
-    fetchServices()
-  }, [])
+    fetchServices();
+  }, [supabase]); // Add supabase as dependency
+  
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
