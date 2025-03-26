@@ -124,9 +124,9 @@ export default function BookingForm() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {['name', 'email', 'phone'].map(field => (
               <div key={field}>
-                <label htmlFor={field} className="block text-sm font-medium text-gray-300 mb-2">
-                  {field === 'phone' ? 'Phone Number' : 'Full Name'}
-                </label>
+               <label htmlFor={field} className="block text-sm font-medium text-gray-300 mb-2">
+      {field === 'name' ? 'Full Name' : field === 'email' ? 'Email' : 'Phone Number'}
+    </label>
                 <input
                   type={field === 'email' ? 'email' : 'text'}
                   name={field}
