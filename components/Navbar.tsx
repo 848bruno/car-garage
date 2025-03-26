@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { usePathname } from 'next/navigation'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -15,14 +15,12 @@ const navigation = [
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const router = useRouter()
+  const pathname = usePathname() // Detects page changes
 
-  // Close menu when navigating to another page
+  // Close mobile menu on route change
   useEffect(() => {
-    const handleRouteChange = () => setMobileMenuOpen(false)
-    router.events?.on('routeChangeStart', handleRouteChange)
-    return () => router.events?.off('routeChangeStart', handleRouteChange)
-  }, [router])
+    setMobileMenuOpen(false)
+  }, [pathname]) // Dependency on pathname to detect changes
 
   return (
     <header className="bg-dark-100">
@@ -62,11 +60,11 @@ export default function Navbar() {
           </Link>
         </div>
       </nav>
-      
-      {/* Mobile Menu */}
+
+      {/* Mobile menu */}
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
-        <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-1/2 overflow-y-auto bg-dark-100 px-6 py-6 sm:ring-1 sm:ring-gray-900/10 transition-transform duration-300">
+        <div className="fixed inset-0 z-10 bg-black/50" /> {/* Background overlay */}
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-20 w-1/2 overflow-y-auto bg-dark-100 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="text-2xl font-bold text-primary-500">AutoCare Pro</span>
@@ -87,7 +85,6 @@ export default function Navbar() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    onClick={() => setMobileMenuOpen(false)} // Close menu on click
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-300 hover:bg-dark-200 hover:text-primary-500"
                   >
                     {item.name}
@@ -97,7 +94,6 @@ export default function Navbar() {
               <div className="py-6">
                 <Link
                   href="/book"
-                  onClick={() => setMobileMenuOpen(false)} // Close menu on click
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-300 hover:bg-dark-200 hover:text-primary-500"
                 >
                   Book Appointment
