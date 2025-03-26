@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 26, 26, 26;
+  --background-end-rgb: 26, 26, 26;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+}
+
+/* Form styles */
+input, textarea, select {
+  @apply bg-dark-200 border-dark-300 text-white placeholder-gray-500;
+}
+
+/* Add DayPicker styles */
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #f97316;
+  --rdp-background-color: #2d2d2d;
+  margin: 1em;
+  background: #1a1a1a;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  color: #ffffff;
+  border: 1px solid #404040;
+}
+
+.rdp-day_selected,
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover {
+  background-color: var(--rdp-accent-color);
+  color: white;
+}
+
+.rdp-day_disabled {
+  color: #737373;
+}
+
+.rdp-day_today {
+  font-weight: bold;
+  color: #f97316;
+}
+
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: #2d2d2d;
+  color: #f97316;
+}
+
+.rdp-head_cell {
+  color: #f97316;
+  font-weight: 600;
+}
+
+.rdp-day {
+  color: #ffffff;
+}
+
+.rdp-nav_button:hover {
+  background-color: #2d2d2d;
+  color: #f97316;
+}
+
+.rdp-caption {
+  color: #f97316;
+  font-weight: 600;
+}
