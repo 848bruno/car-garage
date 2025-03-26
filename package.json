@@ -36,7 +36,7 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
-    "eslint": "8.49.0",
+    "eslint": "^9.23.0",
     "eslint-config-next": "14.1.0"
   }
 }
